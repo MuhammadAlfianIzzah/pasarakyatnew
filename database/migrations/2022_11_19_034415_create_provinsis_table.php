@@ -17,8 +17,11 @@ return new class extends Migration
             $table->uuid("id")->primary();
             $table->string("nama");
             $table->string("logo");
+            $table->text("slug");
+            $table->text("deskripsi");
             $table->string("lat");
             $table->string("lang");
+            $table->softDeletes();
             $table->foreignUuid("negara_id");
             $table->foreign("negara_id")->references("id")->on("negaras");
             $table->timestamps();

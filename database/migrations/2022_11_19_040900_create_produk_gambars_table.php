@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("gambar");
             $table->foreignUuid("produk_id");
             $table->foreign("produk_id")->references("id")->on("produks");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

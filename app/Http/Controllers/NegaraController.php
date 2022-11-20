@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Negara;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class NegaraController extends Controller
@@ -16,6 +17,22 @@ class NegaraController extends Controller
     public function edit(Request $request, Negara $negara)
     {
         return view("pages.negara.edit", compact("negara"));
+    }
+    public function update(Request $request, Negara $negara)
+    {
+        $attr = $request->validate([
+            "nama" => "required",
+            "deskripsi" => "required",
+            "logo" => "required|mimes:png,jpg,jpeg",
+            "lat" => "required",
+            "lang" => "required"
+        ]);
+        if ($request->file("logo")) {
+            Storage::delete($negara->logo);
+            $attr["logo"] = $request->file("logo")->store("/negara/logo");
+        }
+        $negara->update($attr);
+        return redirect()->route("negara-index")->with("success", "berhasil mengupdate data");
     }
     public function store(Request $request)
     {

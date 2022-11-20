@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('penjuals', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->string("nama");
+            $table->text("slug");
             $table->text("deskripsi");
             $table->text("alamat_lengkap");
             $table->string("logo");
             $table->string("lat");
+            $table->softDeletes();
             $table->foreignUuid("kabupaten_id");
             $table->foreign("kabupaten_id")->references("id")->on("kabupatens");
             $table->timestamps();

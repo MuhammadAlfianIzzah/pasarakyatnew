@@ -13,17 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kabupatens', function (Blueprint $table) {
-            $table->uuid("id")->primary();
+        Schema::create('kategori_produks', function (Blueprint $table) {
+            $table->uuid();
             $table->string("nama");
-            $table->text("slug");
-            $table->text("deskripsi");
+            $table->string("deskripsi");
             $table->string("logo");
-            $table->string("lat");
-            $table->string("lang");
-            $table->softDeletes();
-            $table->foreignUuid("provinsi_id");
-            $table->foreign("provinsi_id")->references("id")->on("provinsis");
             $table->timestamps();
         });
     }
@@ -35,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kabupatens');
+        Schema::dropIfExists('kategori_produks');
     }
 };

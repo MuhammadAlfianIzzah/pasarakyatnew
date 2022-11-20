@@ -16,12 +16,17 @@ return new class extends Migration
         Schema::create('vendors', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->string("nama");
+            $table->text("slug");
             $table->text("deskripsi");
             $table->text("alamat_lengkap");
             $table->string("logo");
             $table->string("lat");
+            $table->string("lang");
             $table->foreignUuid("kabupaten_id");
             $table->foreign("kabupaten_id")->references("id")->on("kabupatens");
+            $table->foreignUuid("user_id");
+            $table->foreign("user_id")->references("id")->on("users");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -16,8 +16,10 @@ return new class extends Migration
         Schema::create('produks', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->string("nama");
+            $table->text("slug");
             $table->text("deskripsi");
             $table->integer("harga");
+            $table->softDeletes();
             $table->foreignUuid("penjual_id")->nullable();
             $table->foreign("penjual_id")->references("id")->on("penjuals");
             $table->foreignUuid("vendor_id")->nullable();
